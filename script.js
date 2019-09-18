@@ -20,10 +20,8 @@ function getPagamenti() {
         success: function(data){
 
             var target;
-            
-            $('.rejected').html('');
-            $('.pending').html('');
-            $('.accepted').html('');
+
+            $('.pagamento').remove();
 
             for (let i = 0; i < data.length; i++) {
                 const el = data[i];
