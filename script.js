@@ -20,7 +20,10 @@ function getPagamenti() {
         success: function(data){
 
             var target;
-            console.log(data);
+            
+            $('.rejected').html('');
+            $('.pending').html('');
+            $('.accepted').html('');
 
             for (let i = 0; i < data.length; i++) {
                 const el = data[i];
@@ -56,12 +59,37 @@ function getPagamenti() {
     });
 }
 
+function deleteItem(){
 
+    var btn = $(this).parent();
+    var id_item = btn.data('id');
+
+    console.log(id_item);
+
+    $.ajax({
+        
+        url: 'pagamenti_api_delete.php',
+        method: "GET",
+        data: {id: id_item},
+
+        success: function(data){
+            console.log(data);
+            getPagamenti();
+        },
+        error: function(err){
+            console.log("errore delete items");
+            
+        }
+
+    });
+    
+}
 
 
 function init() {
     getPagamenti()
 
+    $(document).on('click', '.pagamento #delete_btn', deleteItem)
    
 }
 
