@@ -19,14 +19,15 @@ function getPagamenti() {
 
         success: function(data){
 
-            var target;
+            
 
             $('.pagamento').remove();
 
             for (let i = 0; i < data.length; i++) {
                 const el = data[i];
                 
-                switch (el.status) {
+                var target = $('.' + el.status +'');
+                /* switch (el.status) {
                     case "rejected":
                         
                         target = $('.rejected');
@@ -44,9 +45,9 @@ function getPagamenti() {
                         
                     default:
                         break;
-                }
+                } */
 
-                printData(el, target) 
+                printData(el, target); 
             }
             
         },
