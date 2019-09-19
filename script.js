@@ -26,7 +26,7 @@ function getPagamenti() {
             for (let i = 0; i < data.length; i++) {
                 const el = data[i];
                 
-                var target = $('.' + el.status +'');
+                var target = $('#' + el.status +'');
            
                 printData(el, target); 
             }
@@ -65,15 +65,26 @@ function deleteItem(){
     
 }
 
+
 function addItem(){
 
+    /* Richieseta inserimento dati */
     var new_price = prompt("Inserisci l'importo del pagamento");
+    
+    while (!new_price || isNaN(new_price)) {
+        
+        alert("E' richiesto un importo");
+        new_price = prompt("Inserisci l'importo del pagamento");
+    }
 
+
+    /* Risalita per trovare il valore della categoria di 
+    pagamento(rejected, pending, accepted) */
     var parent = $(this).parent();
     var gran_parent = parent.parent();
+    var get_status = gran_parent.attr('id');
 
-    var get_status = gran_parent.attr('class');
-
+    /* CRUD di INSERT */
     $.ajax({
 
         url: 'add_payment.php',
@@ -95,11 +106,53 @@ function addItem(){
     
 }
 
+function setItem(){
+
+    /* Estrapolazione valore attributo data id, che
+    viene inviato come parametro della query attraverso 
+    la chiamata ajax su php */
+    var parent = $(this).parent();
+    var id_ref = parent.data('id');
+
+    /* Richiesta dati per modifica ad utente */
+    var new_status = prompt('Nuovo stato pagamento: rejected, accepted, pending');
+
+    while (!new_status) {
+        
+        alert("E' richiesto uno status, premi annulla per impostarlo");
+        new_status = prompt('Nuovo stato pagamento: rejected, accepted, pending');
+    }
+    $.ajax({
+
+        url: 'update_payment.php',
+        method: "GET",
+        data: {
+            id: id_ref,
+            status: new_status
+        },
+
+        success: function(data){
+
+            getPagamenti();
+        },
+
+        error: function(){
+            console.log("errore CRUD SET");
+            
+        }
+    });
+
+
+    
+    
+}
+
 function init() {
     getPagamenti();
 
     $(document).on('click', '.pagamento #delete_btn', deleteItem);
     $(document).on('click', '.add_payment', addItem);
+    $(document).on('click', '.set_btn', setItem);
    
 }
 

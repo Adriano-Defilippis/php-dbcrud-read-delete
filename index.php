@@ -18,6 +18,7 @@
     <!-- TEMPLATE: MESSAGE MENU -->
     <script id="pagamenti_template" type="text/x-handlebars-template">
       <ul class="pagamento" data-id="{{id}}">
+        <li class="set_btn"><i>Modifica Scheda</i></li>
         <li>identificativo Pagamento: {{id}}</li>
         <li>Prezzo: {{price}}</li>
         <li>Status: {{status}}</li>
@@ -45,13 +46,13 @@
 
     <h1 class="title">Status Pagamenti</h1>
     <div class="wrapper">
-      <div class="rejected">
+      <div id="rejected">
         <h2>Status: RIGETTATO<span class="add_payment"> +</span></h2>
       </div>
-      <div class="pending">
+      <div id="pending">
         <h2>Status: IN ATTESA<span class="add_payment"> +</span></h2>
       </div>
-      <div class="accepted">
+      <div id="accepted">
         <h2>Status: ACCETTATO<span class="add_payment"> +</span></h2>
       </div>
     </div>

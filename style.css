@@ -48,9 +48,9 @@ h1.title{
   clear: both;
 }
 
-.rejected,
-.pending,
-.accepted{
+#rejected,
+#pending,
+#accepted{
 
   width: calc(100% / 3 - 20px);
 
@@ -64,9 +64,9 @@ h1.title{
   border-radius: 10px;
 }
 
-.rejected,
-.pending,
-.accepted,
+#rejected,
+#pending,
+#accepted,
 h2{
   margin: 10px auto;
 }
@@ -83,6 +83,11 @@ h2{
   padding: 20px 10px;
   position: relative;
 
+}
+
+.set_btn{
+  color: blueviolet;
+  cursor: pointer;
 }
 
 ul.stanza li{
