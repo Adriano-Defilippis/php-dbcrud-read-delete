@@ -27,26 +27,7 @@ function getPagamenti() {
                 const el = data[i];
                 
                 var target = $('.' + el.status +'');
-                /* switch (el.status) {
-                    case "rejected":
-                        
-                        target = $('.rejected');
-                        break;
-
-                    case "pending":
-
-                        target = $('.pending');
-                        break;    
-            
-                    case "accepted":
-
-                        target = $('.accepted');
-                        break;
-                        
-                    default:
-                        break;
-                } */
-
+           
                 printData(el, target); 
             }
             
@@ -84,11 +65,41 @@ function deleteItem(){
     
 }
 
+function addItem(){
+
+    var new_price = prompt("Inserisci l'importo del pagamento");
+
+    var parent = $(this).parent();
+    var gran_parent = parent.parent();
+
+    var get_status = gran_parent.attr('class');
+
+    $.ajax({
+
+        url: 'add_payment.php',
+        method: "GET",
+        data: { status: get_status,
+                price:  new_price       
+        },
+
+        success: function(data){
+
+            getPagamenti();
+        },
+
+        error: function(err){
+            console.log("Errore api addItems in database");
+            
+        }
+    });
+    
+}
 
 function init() {
-    getPagamenti()
+    getPagamenti();
 
-    $(document).on('click', '.pagamento #delete_btn', deleteItem)
+    $(document).on('click', '.pagamento #delete_btn', deleteItem);
+    $(document).on('click', '.add_payment', addItem);
    
 }
 

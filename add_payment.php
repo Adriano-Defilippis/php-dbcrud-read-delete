@@ -1,6 +1,6 @@
 <?php 
 
-header('Content-type: application/json');
+/* header('Content-type: application/json'); */
 
 /* DEFINIAMO I PARAMETRI DI CONNESSIONE AL DATABASE */
 $servername= 'localhost';
@@ -16,23 +16,20 @@ if ($conn -> connect_error) {
     die();
 }
 
-$query = "SELECT  pagamenti.id, 
-                  pagamenti.status,
-                  pagamenti.price
-            FROM `pagamenti`
-            WHERE pagamenti.id > 30";
+$price = $_GET['price'];
+$status = $_GET['status'];
+
+$query = "
+            INSERT INTO pagamenti (status, price, prenotazione_id, pagante_id)
+            VALUES
+            ('" . $status . "', " . $price . ", 1, 1)
+        ";
+
+
 
 $res = $conn -> query($query);
 
-$pagamenti = [];
 
-if ($res && $res -> num_rows > 0) {
-    
-    while ($row = $res -> fetch_assoc()) {
-        
-        $pagamenti[] = $row;
-    }
-}
 
 $conn->close();
 echo json_encode($pagamenti);

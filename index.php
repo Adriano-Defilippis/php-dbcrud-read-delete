@@ -46,13 +46,13 @@
     <h1 class="title">Status Pagamenti</h1>
     <div class="wrapper">
       <div class="rejected">
-        <h2>Status RIGETTATO</h2>
+        <h2>Status: RIGETTATO<span class="add_payment"> +</span></h2>
       </div>
       <div class="pending">
-        <h2>Status: In Attesa</h2>
+        <h2>Status: IN ATTESA<span class="add_payment"> +</span></h2>
       </div>
       <div class="accepted">
-        <h2>Status: Accettato</h2>
+        <h2>Status: ACCETTATO<span class="add_payment"> +</span></h2>
       </div>
     </div>
 
